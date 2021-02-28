@@ -1,48 +1,99 @@
 let express = require('express');
+let app = express();
 let path = require('path');
 let fs = require('fs');
-let util = require('util');
-const { prototype } = require('events');
+let todos = require('./src/todo');
+let uuid = require('uuid');
 
-let readFileAsync = util.promisify(fs.readFile);
-let writeFileAsync = util.promisify(fs,writeFile);
-let app = express();
 let PORT = process.env.PORT || 8000;
 
+let Todo =require('./src/todo');
+const e = require('express');
+
+app.use(express.json())
 app.use(express.urlencoded({extended: true}));
-app.use(express.json());
-app.use(expres.static("./public"));
+app.use(express.static(__dirname +'/assets'))
 
-app.get('/api/notes', (req, res) => {
-res.sendFile(path.join(__dirname, "/db/db.json"))
-});
-app.post('/api/notes', (req, res) => {
-    let notes = JSon.parse(fs.readFileSync('.db/db.json'));
-    let newNotes = req.body;
-    newNotes.id =util.v4();
-    notes.push(newNotes);
-    fs.writeFileSync('./db/db.json', JSON.stringify(notes))
-    res.json(notes);
-});
+//git all todos
+app.get('/todos/api', (req, res) =>{
+    res.json(todos);});
+ 
 
-app.delete("api/notes/:id", (req, res) =>{
-    let notes = JSON.parse(fs.readFileSync('./db/db.json'));
-    const delNote = notes.filter((rmvNote) => rmvNote.id !== req.params.id);
-    fs.writeFileSync('./db/db.json', JSON.stringify(delNote));
-    res.json(delNote);
-})
 
-app.get("/", function(req, res){
-    res.sendFile(path.join(__dirname, "/public/index.html"));
+//set static folder
+app.use(express.static(path.join(__dirname, 'assets' )));
 
-});
+//get single Member
+app.get('/todos/api/:id', (req, res) => {
+res.json(todos.filter(todo => todo.id === parseInt(req.params.id)));
+if (found) {
+    res.json(todos.filter(todo => todo.id === parseInt(req.params.id)));
+}else{
+    res.status(400).json({ msg: `No member with the id of ${req.params.id}`});
 
-app.get('notes', function(req, res){
-    res.sendFile(path.join(__dirname, "/public/notes.html"));
+}
 });
 
 
-app.listen(PORT, function(){
-    console.log('App listening on PORT: ' + PORT);
+//Create Member
+app.post('/todos/api', (req, res) =>{
+    let newNote ={
+        id:uuid.v4(),
+        name: req.body.name,
+        email: req.body.email,
+        status: 'active'
+    }
+    if(!newNote.name || !newNote.email){
+       return res.status(400).json({ msg:'please include a name and email'});
+    }
+    todos.push(newNote);
+    res.json(todos);
+
 });
-app.listen(process.env.PORT || prototype, () => console.log('Example app listening at http://localhost:${port}'));
+
+//update Member
+
+
+app.put('/todos/api/:id', (req, res) => {
+ let found = todos.some(todo => todo.id === parseInt(req.params.id));
+
+ if (found) {
+    let updateNote = req.body;
+    todos.forEach(todo => {
+        if(todo.id === parseInt(req.params.id)){
+            todo.name = updateNote.name ? updateNote.name : todo.name;
+            todo.email = updateNote.email ? updateNote.email : todo.email;
+            res.json ({msg: 'Member updated', todo});
+        }
+     });
+  } else {
+       res.status(400).json({msg:`No member with the id of ${req.params.id}`});
+}
+});
+
+
+//Delete Member
+app.delete('/todos/api/:id', (req, res) => {
+    let found = todos.some(todo => todo.id === parseInt(req.params.id));
+    
+    if (found) {
+        res.json({
+            msg: 'Note deleted', 
+            todos: todos.filter(todo => todo.id !== parseInt(req.params.id))
+    });
+    }else{
+        res.status(400).json({ msg: `No member with the id of ${req.params.id}`});
+    
+    }
+    });
+
+
+app.listen(PORT, () =>
+    console.log('Server started on port ${PORT}')
+);
+
+
+
+
+
+
