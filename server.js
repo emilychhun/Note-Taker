@@ -6,7 +6,7 @@ const app = express();
 let PORT = process.env.PORT || 8000;
 let httpMsgs = require("http-msgs");
 
-app.use(express.static('asset'));
+app.use(express.static('assets'));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
@@ -39,7 +39,7 @@ app.post("/api/notes", (req, res) => {
     let uniqueID = (savedNotes.length).toString();
     newNote.id = uniqueID;
     savedNotes.push(newNote);
-console.log(data);
+     console.log(data);
 
     fs.writeFileSync("./db/db.json", JSON.stringify(savedNotes));
     console.log("Note saved to db.json. Content: ", newNote);
