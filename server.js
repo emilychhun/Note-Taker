@@ -1,98 +1,78 @@
-let express = require('express');
-let app = express();
-let path = require('path');
-let fs = require('fs');
-let todos = require('./src/todo');
-let uuid = require('uuid');
+const express = require("express");
+const path = require("path");
+const fs = require("fs");
 
+const app = express();
 let PORT = process.env.PORT || 8000;
+let httpMsgs = require("http-msgs");
 
-let Todo =require('./src/todo');
-const e = require('express');
-
-app.use(express.json())
+app.use(express.static('asset'));
 app.use(express.urlencoded({extended: true}));
-app.use(express.static(__dirname +'/assets'))
+app.use(express.json());
 
-//git all todos
-app.get('/todos/api', (req, res) =>{
-    res.json(todos);});
+app.get("/notes", (req, res) =>{
+    res.sendFile(path.join(__dirname, "assets", "notes.html"));
+});
+
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "assets", "index.html"));
+});
+
+//get all notes
+
+app.get("/api/notes", (req, res) => {
+    res.sendFile(path.join(__dirname, "/db/db.json"));
+});
+
+//get single note
+app.get("/api/notes/:id", (req, res) => {
+    let savedNotes = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
+    res.json(savedNotes[Number(req.params.id)]);
+});
+
+
+//Create note
+
+app.post("/api/notes", (req, res) => {
+    let savedNotes = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
+    let newNote = req.body;
+    let uniqueID = (savedNotes.length).toString();
+    newNote.id = uniqueID;
+    savedNotes.push(newNote);
+console.log(data);
+
+    fs.writeFileSync("./db/db.json", JSON.stringify(savedNotes));
+    console.log("Note saved to db.json. Content: ", newNote);
+    httpMsgs.res.json(savedNotes);
+})
  
 
 
-//set static folder
-app.use(express.static(path.join(__dirname, 'assets' )));
-
-//get single Member
-app.get('/todos/api/:id', (req, res) => {
-res.json(todos.filter(todo => todo.id === parseInt(req.params.id)));
-if (found) {
-    res.json(todos.filter(todo => todo.id === parseInt(req.params.id)));
-}else{
-    res.status(400).json({ msg: `No member with the id of ${req.params.id}`});
-
-}
-});
-
-
-//Create Member
-app.post('/todos/api', (req, res) =>{
-    let newNote ={
-        id:uuid.v4(),
-        name: req.body.name,
-        email: req.body.email,
-        status: 'active'
-    }
-    if(!newNote.name || !newNote.email){
-       return res.status(400).json({ msg:'please include a name and email'});
-    }
-    todos.push(newNote);
-    res.json(todos);
-
-});
-
-//update Member
-
-
-app.put('/todos/api/:id', (req, res) => {
- let found = todos.some(todo => todo.id === parseInt(req.params.id));
-
- if (found) {
-    let updateNote = req.body;
-    todos.forEach(todo => {
-        if(todo.id === parseInt(req.params.id)){
-            todo.name = updateNote.name ? updateNote.name : todo.name;
-            todo.email = updateNote.email ? updateNote.email : todo.email;
-            res.json ({msg: 'Member updated', todo});
-        }
-     });
-  } else {
-       res.status(400).json({msg:`No member with the id of ${req.params.id}`});
-}
-});
-
-
-//Delete Member
-app.delete('/todos/api/:id', (req, res) => {
-    let found = todos.some(todo => todo.id === parseInt(req.params.id));
+//Delete note
+app.delete("/api/notes/:id", (req, res) => {
+    let savedNotes = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
+    let noteID = req.params.id;
+    let newID = 0;
+    console.log(`Deleting note with ID ${noteID}`);
+    savedNotes = savedNotes.filter(currNote => {
+        return currNote.id != noteID;
+    })
     
-    if (found) {
-        res.json({
-            msg: 'Note deleted', 
-            todos: todos.filter(todo => todo.id !== parseInt(req.params.id))
-    });
-    }else{
-        res.status(400).json({ msg: `No member with the id of ${req.params.id}`});
-    
+    for (currNote of savedNotes) {
+        currNote.id = newID.toString();
+        newID++;
     }
-    });
+
+    fs.writeFileSync("./db/db.json", JSON.stringify(savedNotes));
+    res.json(savedNotes);
+})
 
 
-app.listen(PORT, () =>
-    console.log('Server started on port ${PORT}')
+
+
+app.listen(PORT, () =>{
+    console.log(`Server is running on http://localhost:${PORT}`)}
 );
-
-
 
 
 
