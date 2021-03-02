@@ -43,7 +43,8 @@ app.post("/api/notes", (req, res) => {
 
     fs.writeFileSync("./db/db.json", JSON.stringify(savedNotes));
     console.log("Note saved to db.json. Content: ", newNote);
-    httpMsgs.res.json(savedNotes);
+    res.json(savedNotes);
+    httpMsge.send8000
 })
  
 
