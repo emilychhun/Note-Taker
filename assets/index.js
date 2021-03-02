@@ -1,9 +1,11 @@
 
 $('.save').on('click', function(e){
-    let count =0;
+   
     e.preventDefault();
     let noteTitle = $('.note-title').val()
     let noteTextarea = $('.note-textarea').val()
+    let del = $("<span class='remove><i class ='material-icons'>delete</i></span>")
+    let check =$("<i class ='material-icons'>check</i>")
     
  
     $.ajax({
@@ -15,9 +17,8 @@ $('.save').on('click', function(e){
     }, 
     success: function(res){
         console.log("success", noteTitle, res);
-        count ++;
-        $('#list-group').append($('<li><div class="left-cont"> + <input type="checkbox" id="check-'+ noteTitle +'" name=""><label for="check-'+count+'"></label><span>'+noteTitle+'</span></div><span class ="remove"><i class="material-icons">delete</i></span></li>').text(noteTitle))
-        $('#list-group').append($('<li><div class="left-cont"> + <input type="checkbox" id="check-'+count+'" name=""><label for="check-'+count+'"></label><span>'+noteTitle+'</span></div><span class ="remove"><i class="material-icons">delete</i></span></li>').text(noteTitle))
+        $('.list-group').append($('<li></li>').text(noteTitle))
+        $('.note-title').append(del,check);
         $('.note-title').val('')
         $('.note-textarea').val('')
     } 

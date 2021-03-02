@@ -158,3 +158,12 @@ background: #ffc800;
         transform: translateY();
         transition: .5s;
     }
+    .list-group{
+        width: 100%;
+        background: reba(255,255,255 0.5);
+        padding:10px;
+        margin: 6px;
+        
+        
+
+    }
