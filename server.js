@@ -1,12 +1,15 @@
 const express = require("express");
 const path = require("path");
 const fs = require("fs");
-
+let  = require('uuid');
 const app = express();
 let PORT = process.env.PORT || 8000;
 let httpMsgs = require("http-msgs");
 
+
+//set Static Path
 app.use(express.static('assets'));
+//Middleware
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
@@ -48,11 +51,10 @@ app.post("/api/notes", (req, res) => {
 })
  
 
-
 //Delete note
 app.delete("/api/notes/:id", (req, res) => {
-    let savedNotes = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
-    let noteID = req.params.id;
+
+   let noteID = req.params.id;
     let newID = 0;
     console.log(`Deleting note with ID ${noteID}`);
     savedNotes = savedNotes.filter(currNote => {

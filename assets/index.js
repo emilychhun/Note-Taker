@@ -4,8 +4,8 @@ $('.save').on('click', function(e){
     e.preventDefault();
     let noteTitle = $('.note-title').val()
     let noteTextarea = $('.note-textarea').val()
-    let del = $("<span class='remove><i class ='material-icons'>delete</i></span>")
-    let check =$("<i class ='material-icons'>check</i>")
+    let del = $("<i class ='fas fa-trash remove'</i>")
+    
     
  
     $.ajax({
@@ -17,13 +17,27 @@ $('.save').on('click', function(e){
     }, 
     success: function(res){
         console.log("success", noteTitle, res);
-        $('.list-group').append($('<li></li>').text(noteTitle))
-        $('.note-title').append(del,check);
+        $('.list-group').append($(`<li class='note-icon'>${noteTitle}</li>`))
+     
+        $('.note-icon').append(del);
         $('.note-title').val('')
         $('.note-textarea').val('')
     } 
 })
 })
- $(document).on('click', 'remove', function(){
 
- })
+$('.list-group').on('click', '.remove', (e) =>{
+    let rowEl = $(this).closest('li');
+    let id =rowEl.find('.note-icon').text();
+ 
+alert("working")
+   $.ajax({
+    url: "/api/notes/" +id,
+    method: "delete",
+
+success: function(res){
+      console.log("success", res);
+   $(e.target).fadeOut()
+} 
+})
+})
