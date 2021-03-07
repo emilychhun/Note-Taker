@@ -10,7 +10,7 @@ $('.save').on('click', function(e){
  
     $.ajax({
         url:'/api/notes',
-        Method: 'post',
+        type: 'POST',
         data:{
             noteTitle: noteTitle,
             noteTextarea: noteTextarea,
@@ -30,10 +30,10 @@ $('.list-group').on('click', '.remove', (e) =>{
     let rowEl = $(this).closest('li');
     let id =rowEl.find('.note-icon').text();
  
-alert("working")
+
    $.ajax({
     url: "/api/notes/" +id,
-    method: "delete",
+    type: "DELETE",
 
 success: function(res){
       console.log("success", res);

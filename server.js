@@ -1,7 +1,8 @@
 const express = require("express");
+const uuid = require("uuid");
 const path = require("path");
 const fs = require("fs");
-let  = require('uuid');
+
 const app = express();
 let PORT = process.env.PORT || 8000;
 let httpMsgs = require("http-msgs");
@@ -33,41 +34,39 @@ app.get("/api/notes/:id", (req, res) => {
     res.json(savedNotes[Number(req.params.id)]);
 });
 
-
 //Create note
 
 app.post("/api/notes", (req, res) => {
     let savedNotes = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
     let newNote = req.body;
-    let uniqueID = (savedNotes.length).toString();
+    let uniqueID = uuid.v4();
     newNote.id = uniqueID;
-    savedNotes.push(newNote);
-     console.log(data);
 
-    fs.writeFileSync("./db/db.json", JSON.stringify(savedNotes));
-    console.log("Note saved to db.json. Content: ", newNote);
-    res.json(savedNotes);
-    httpMsge.send8000
-})
+     savedNotes.push(newNote);
+     console.log(newNote); 
  
+     fs.writeFileSync("./db/db.json", JSON.stringify(savedNotes));
+     console.log("Note saved to db.json. Content: ", newNote);
+     res.json(savedNotes);
+   //  httpMsge.send8000;
+ })
+  
+
+
 
 //Delete note
 app.delete("/api/notes/:id", (req, res) => {
+    let savedNotes = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
+    let noteID = req.params.id;
 
-   let noteID = req.params.id;
-    let newID = 0;
     console.log(`Deleting note with ID ${noteID}`);
-    savedNotes = savedNotes.filter(currNote => {
-        return currNote.id != noteID;
-    })
     
-    for (currNote of savedNotes) {
-        currNote.id = newID.toString();
-        newID++;
-    }
+    savedNotes = savedNotes.filter(function(item) { 
+        return item.id !== noteID;  
+     });
 
     fs.writeFileSync("./db/db.json", JSON.stringify(savedNotes));
-    res.json(savedNotes);
+      res.json(savedNotes);
 })
 
 
