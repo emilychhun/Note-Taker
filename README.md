@@ -16,9 +16,9 @@
 
   *The what, why, and how:* 
   
-  🔍 When creating an open source project on GitHub, it is important to have a quality README. In order to be a good README, it should include information about the app such as what is the app for,how to use the app, how to install it, how to report issues.  Also this README should explain detail about how, who, when to make contributions to other developers. These are more likely help developer and other users to success of the project. To create a quality README, a command-line application is important.  It will allow for quick and easy generation of a project README to get started quickly. This will allow a project creator to spend more time working on finishing the project and less time creating a good README.  The command-line application that runs with Node.js that dynamically generates a README.md file based on input about your project. 
+  🔍 Note Taker is simple note taking application.  It designed to allows you to create an application that can be used to write, save and delete notes, and saving and retrieving note data from a JSON file by using express backend. 
 
- *Check out the [ExampleREADME.md](https://github.com/emilychhun/challenge9readme/blob/main/demo/DemoREADME.md) as an example.*
+ *Check out the [ExampleREADME.md](https://github.com/emilychhun/Note-Taker/blob/main/README.md) as an example.*
   <br />
  
   ## Table of contents
@@ -36,7 +36,7 @@
 
   *Steps required to install project and how to get the development environment running:*
   
-💽💽 In order to use the application, first the user will need to have node.js installed. Then, user will need to clone the repository into the command line. Once the repository has been cloned, the user will need to change directories into the repository and run the command "npm install" in order to retrieve the neccessary dependencies.
+💽💽 The dependencies are necessary to be installed to be able to run the application To Run this application you are required to install nodemon, npm express, and npm package called "uuid".
 
 <br />
   
@@ -83,7 +83,7 @@
   Email me with any questions: emily_chhun23@yahoo.com
   <br />
 
-  repo link: [readme-repo-link](https://github.com/emilychhun/challenge9readme)
+  repo link: [readme-repo-link](https://github.com/emilychhun/Note-Taker)
   
   <br />
   
