@@ -17,27 +17,57 @@ $('.save').on('click', function(e){
     }, 
     success: function(res){
         console.log("success", noteTitle, res);
-        $('.list-group').append($(`<li class='note-icon'>${noteTitle}</li>`))
-     
-        $('.note-icon').append(del);
-        $('.note-title').val('')
-        $('.note-textarea').val('')
+        getAllNote();
     } 
 })
 })
 
-$('.list-group').on('click', '.remove', (e) =>{
+$('.list-group').on('click', '.remove', function(e){
+
     let rowEl = $(this).closest('li');
-    let id =rowEl.find('.note-icon').text();
+    let id = rowEl.attr('id');
  
+    console.log("id" + id);
 
    $.ajax({
     url: "/api/notes/" +id,
     type: "DELETE",
 
 success: function(res){
-      console.log("success", res);
-   $(e.target).fadeOut()
+    console.log("success", res);
+   $(rowEl).fadeOut()
 } 
 })
 })
+
+var getAllNote = function()
+{
+
+    $('.list-group').empty();
+
+    let noteTitle = $('.note-title').val();
+    let noteTextarea = $('.note-textarea').val();
+
+
+    $.ajax({
+        url:'/api/notes',
+        type: 'GET',
+        data:{
+            noteTitle: noteTitle,
+            noteTextarea: noteTextarea,
+    }, 
+    success: function(res){
+
+       for (var i = 0; i < res.length; i++) {
+            $('.list-group').append($(`<li id=${res[i].id} class='note-icon'>${res[i].noteTitle} <i class ='fas fa-trash remove'</i> </li>`));
+     
+            $('.note-title').val('');
+            $('.note-textarea').val('');
+      
+        }
+
+        } 
+})
+};
+
+getAllNote();

@@ -18,13 +18,12 @@ app.get("/notes", (req, res) =>{
     res.sendFile(path.join(__dirname, "assets", "notes.html"));
 });
 
-app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "assets", "index.html"));
-});
+
 
 //get all notes
 
 app.get("/api/notes", (req, res) => {
+
     res.sendFile(path.join(__dirname, "/db/db.json"));
 });
 
@@ -56,11 +55,10 @@ app.post("/api/notes", (req, res) => {
 
 //Delete note
 app.delete("/api/notes/:id", (req, res) => {
+
     let savedNotes = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
     let noteID = req.params.id;
-
-    console.log(`Deleting note with ID ${noteID}`);
-    
+ 
     savedNotes = savedNotes.filter(function(item) { 
         return item.id !== noteID;  
      });
@@ -69,7 +67,9 @@ app.delete("/api/notes/:id", (req, res) => {
       res.json(savedNotes);
 })
 
-
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "assets", "index.html"));
+});
 
 
 app.listen(PORT, () =>{
