@@ -3,13 +3,8 @@
 
 ![badge](https://img.shields.io/npm/v/npm.svg?logo=javascript)
 ![badge](https://img.shields.io/npm/v/npm.svg?logo=npm)
-[![License](https://img.shields.io/badge/License-Boost%201.0-lightblue.svg)](https://www.boost.org/LICENSE_1_0.txt)
-[![License: Open Data Commons Attribution](https://img.shields.io/badge/License-ODC_BY-brightgreen.svg)](https://opendatacommons.org/licenses/by/)
-![badge](https://img.shields.io/static/v1?logo=react&message=React&color=Blue)
 ![badge](https://img.shields.io/npm/v/npm.svg?logo=javascript)
- <a href="https://twitter.com/jpdewoody">
-  <img alt="Twitter: jpdewoody" src="https://img.shields.io/twitter/follow/jpdewoody.svg?style=social" target="_blank" />
- </a>
+
 </h1>
 
 ## Description 
@@ -46,9 +41,6 @@
   
   📚 After cloning the repo and installing npm inquirer, use the command line to navigate and type node index. Follow prompts to enter required fields and select from optional additional fields. The README will be created in the ./demo folder.
   
-  *Demo*
-
-  View a demonstration of the application:
   <br />
   
   ## Licence
