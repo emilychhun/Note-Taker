@@ -1,4 +1,4 @@
-<h1 align="center">✌️🤟🙏👋Welcome to readme-md-generator  ✌️🤟🙏👋</h1>
+<h1 align="center">✌️🤟🙏👋  Note Taker  ✌️🤟🙏👋</h1>
 <h1 align="center">
 
 ![badge](https://img.shields.io/npm/v/npm.svg?logo=javascript)
