@@ -51,8 +51,6 @@
   View a demonstration of the application:
   <br />
   
-  ![alt text](https://github.com/emilychhun/challenge9readme/blob/main/READMe-generator-emily1.gif "Logo Title Text 1")
-  
   ## Licence
   📝📑
   
@@ -83,7 +81,7 @@
   Email me with any questions: emily_chhun23@yahoo.com
   <br />
 
-  repo link: [readme-repo-link](https://github.com/emilychhun/Note-Taker)
+  repo link: [repo-link](https://github.com/emilychhun/Note-Taker)
   
   <br />
   
