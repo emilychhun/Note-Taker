@@ -41,9 +41,12 @@
   
   📚 After cloning the repo and installing npm inquirer, use the command line to navigate and type node index. Follow prompts to enter required fields and select from optional additional fields. The README will be created in the ./demo folder.
   
+   *Demo*
+
+  View a demonstration of the application:
   <br />
   
-  ![alt text][Note-Taker.PNG]
+ ![alt text](https://github.com/emilychhun/employee-tracker/blob/main/employee-tracker.gif "Logo Title Text 1")
   
   ## Licence
   📝📑
