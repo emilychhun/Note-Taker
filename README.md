@@ -46,7 +46,7 @@
   View a demonstration of the application:
   <br />
   
- ![alt text](https://github.com/emilychhun/employee-tracker/blob/main/employee-tracker.gif "Logo Title Text 1")
+ ![alt text](https://github.com/emilychhun/Note-Taker/blob/main/Note-Taker1.PNG"Logo Title Text 1")
   
   ## Licence
   📝📑
