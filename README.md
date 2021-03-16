@@ -43,6 +43,8 @@
   
   <br />
   
+  ![alt text][Note-Taker.PNG]
+  
   ## Licence
   📝📑
   
