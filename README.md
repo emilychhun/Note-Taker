@@ -48,7 +48,7 @@
   ![alt text](https://github.com/emilychhun/Note-Taker/blob/main/Note-Taker1.PNG"Logo Title Text 1")
   <br />
   
-  ![alt text](https://github.com/emilychhun/Note-Taker/blob/main/Note-Taker1.PNG"Logo Title Text 1")
+  ![alt text](https://github.com/emilychhun/Note-Taker/blob/main/Note-Taker2.PNG"Logo Title Text 1")
   
   ## Licence
   📝📑
